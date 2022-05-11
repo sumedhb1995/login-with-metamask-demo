@@ -10,7 +10,15 @@ const app = express();
 
 // Middlewares
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+	origin: [
+	  "http://localhost:3000",
+	  "http://localhost:8080",
+	  "https://sumedhb1995.github.io/"
+	],
+	credentials: true,
+	exposedHeaders: ["set-cookie"],
+}));
 
 // Mount REST on /api
 app.use('/api', services);
