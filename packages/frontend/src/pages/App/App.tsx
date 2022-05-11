@@ -12,7 +12,7 @@ import axios from 'axios';
 import { Route, useHistory } from 'react-router-dom';
 import Home from '../Home';
 
-const LS_KEY = 'login-with-metamask:auth';
+const LS_KEY = 'postmint-metamask:auth';
 
 interface JwtDecoded {
 	payload: {

@@ -1,12 +1,8 @@
 {
-	"name": "@login-with-metamask/backend",
-	"version": "2.0.0",
-	"author": "Amaury <amaurym10@protonmail.com>",
-	"description": "Demo project for 'One-click Login with Blockchain: A MetaMask Tutorial'",
-	"license": "MIT",
-	"main": "lib",
+	"name": "postmint",
+  	"version": "0.1.0",
 	"private": true,
-	"repository": "https://github.com/amaurym/login-with-metamask-demo.git",
+	"repository": "https://github.com/postmint/delphi.git",
 	"scripts": {
 		"build": "tsc",
 		"dev": "nodemon --config nodemon.json src/index.ts",
