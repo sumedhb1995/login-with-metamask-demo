@@ -3,10 +3,8 @@ import './Login.css';
 import React, { useState } from 'react';
 import Web3 from 'web3';
 
-import { Auth } from '../types';
-
 interface Props {
-	onLoggedIn: (auth: Auth) => void;
+	onLoggedIn: (accessToken: string) => void;
 }
 
 let web3: Web3 | undefined = undefined; // Will hold the web3 instance

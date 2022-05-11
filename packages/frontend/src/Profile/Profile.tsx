@@ -4,10 +4,8 @@ import jwtDecode from 'jwt-decode';
 import React, { useState, useEffect } from 'react';
 import Blockies from 'react-blockies';
 
-import { Auth } from '../types';
-
 interface Props {
-	auth: Auth;
+	accessToken: string;
 	onLoggedOut: () => void;
 }
 
@@ -27,7 +25,7 @@ interface JwtDecoded {
 	};
 }
 
-export const Profile = ({ auth, onLoggedOut }: Props): JSX.Element => {
+export const Profile = ({ accessToken, onLoggedOut }: Props): JSX.Element => {
 	const [state, setState] = useState<State>({
 		loading: false,
 		user: undefined,
@@ -35,7 +33,6 @@ export const Profile = ({ auth, onLoggedOut }: Props): JSX.Element => {
 	});
 
 	useEffect(() => {
-		const { accessToken } = auth;
 		const {
 			payload: { id },
 		} = jwtDecode<JwtDecoded>(accessToken);
@@ -57,7 +54,6 @@ export const Profile = ({ auth, onLoggedOut }: Props): JSX.Element => {
 	};
 
 	const handleSubmit = () => {
-		const { accessToken } = auth;
 		const { user, username } = state;
 
 		setState({ ...state, loading: true });
@@ -84,8 +80,6 @@ export const Profile = ({ auth, onLoggedOut }: Props): JSX.Element => {
 				setState({ ...state, loading: false });
 			});
 	};
-
-	const { accessToken } = auth;
 
 	const {
 		payload: { publicAddress },
