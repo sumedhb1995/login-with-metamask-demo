@@ -1,6 +1,5 @@
-import './Login.css';
-
 import React, { useState } from 'react';
+import { Button, Typography } from '@mui/material';
 import Web3 from 'web3';
 import { IAuth } from '../../interfaces';
 
@@ -112,21 +111,16 @@ export const Login = ({ onLoggedIn }: Props): JSX.Element => {
 
 	return (
 		<div>
-			<p>
-				Please select your login method.
-				<br />
-				For the purpose of this demo, only MetaMask login is
-				implemented.
-			</p>
-			<button className="Login-button Login-mm" onClick={handleClick}>
+			<Typography variant="h6" style={{ padding: 20 }}>
+				Please login to connect your wallet.
+			</Typography>
+			<Button
+				variant="contained"
+				onClick={handleClick}
+				style={{ backgroundColor: 'rgb(255, 125, 0)' }}
+			>
 				{loading ? 'Loading...' : 'Login with MetaMask'}
-			</button>
-			<button className="Login-button Login-fb" disabled>
-				Login with Facebook
-			</button>
-			<button className="Login-button Login-email" disabled>
-				Login with Email
-			</button>
+			</Button>
 		</div>
 	);
 };

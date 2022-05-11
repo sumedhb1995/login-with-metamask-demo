@@ -1,55 +1,27 @@
 import './Profile.css';
 
-import jwtDecode from 'jwt-decode';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Blockies from 'react-blockies';
-import { IAuth } from '../../interfaces';
+import { IUser } from '../../interfaces';
+import { AuthContext } from '../../contexts';
+import axios from 'axios';
+import { Button, Input, Typography } from '@mui/material';
 
 interface Props {
-	auth: IAuth;
 	onLoggedOut: () => void;
 }
 
 interface State {
 	loading: boolean;
-	user?: {
-		id: number;
-		username: string;
-	};
 	username: string;
 }
 
-interface JwtDecoded {
-	payload: {
-		id: string;
-		publicAddress: string;
-	};
-}
-
-export const Profile = ({
-	auth: { accessToken },
-	onLoggedOut,
-}: Props): JSX.Element => {
+export const Profile = ({ onLoggedOut }: Props): JSX.Element => {
+	const { user, setUser } = React.useContext(AuthContext);
 	const [state, setState] = useState<State>({
 		loading: false,
-		user: undefined,
-		username: '',
+		username: user?.username ?? '',
 	});
-
-	useEffect(() => {
-		const {
-			payload: { id },
-		} = jwtDecode<JwtDecoded>(accessToken);
-
-		fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${id}`, {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		})
-			.then((response) => response.json())
-			.then((user) => setState({ ...state, user }))
-			.catch(window.alert);
-	}, []);
 
 	const handleChange = ({
 		target: { value },
@@ -58,7 +30,7 @@ export const Profile = ({
 	};
 
 	const handleSubmit = () => {
-		const { user, username } = state;
+		const { username } = state;
 
 		setState({ ...state, loading: true });
 
@@ -69,49 +41,59 @@ export const Profile = ({
 			return;
 		}
 
-		fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${user.id}`, {
-			body: JSON.stringify({ username }),
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				'Content-Type': 'application/json',
-			},
-			method: 'PATCH',
-		})
-			.then((response) => response.json())
-			.then((user) => setState({ ...state, loading: false, user }))
+		axios
+			?.patch(`${process.env.REACT_APP_BACKEND_URL}/users/${user.id}`, {
+				username,
+			})
+			.then((response) => response.data as IUser)
+			.then((user) => {
+				setState({ ...state, loading: false });
+				setUser?.(user);
+			})
 			.catch((err) => {
 				window.alert(err);
 				setState({ ...state, loading: false });
 			});
 	};
 
-	const {
-		payload: { publicAddress },
-	} = jwtDecode<JwtDecoded>(accessToken);
-
-	const { loading, user } = state;
+	const { loading } = state;
 
 	const username = user && user.username;
 
 	return (
 		<div className="Profile">
-			<p>
-				Logged in as <Blockies seed={publicAddress} />
-			</p>
+			<Typography style={{ margin: 20 }}>
+				Logged in as <Blockies seed={user?.publicAddress} />
+			</Typography>
+			<Typography>
+				My username is {username ? <pre>{username}</pre> : 'not set.'}
+				My publicAddress is <pre>{user?.publicAddress}</pre>
+			</Typography>
 			<div>
-				My username is {username ? <pre>{username}</pre> : 'not set.'}{' '}
-				My publicAddress is <pre>{publicAddress}</pre>
-			</div>
-			<div>
-				<label htmlFor="username">Change username: </label>
-				<input name="username" onChange={handleChange} />
-				<button disabled={loading} onClick={handleSubmit}>
+				<Typography>Change username: </Typography>
+				<Input
+					name="username"
+					style={{ margin: 10 }}
+					onChange={handleChange}
+				/>
+				<Button
+					style={{ margin: 10 }}
+					disabled={loading}
+					variant="outlined"
+					onClick={handleSubmit}
+				>
 					Submit
-				</button>
+				</Button>
 			</div>
-			<p>
-				<button onClick={onLoggedOut}>Logout</button>
-			</p>
+			<Typography>
+				<Button
+					style={{ margin: 10 }}
+					variant="contained"
+					onClick={onLoggedOut}
+				>
+					Logout
+				</Button>
+			</Typography>
 		</div>
 	);
 };

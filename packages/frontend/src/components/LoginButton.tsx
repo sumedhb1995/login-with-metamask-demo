@@ -5,10 +5,9 @@ import {
 	IconButton,
 	Menu,
 	MenuItem,
-	ListItemText,
 	PopoverOrigin,
 } from '@mui/material';
-import { useHistory } from 'react-router';
+import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const LoginButton = (): JSX.Element => {
@@ -17,7 +16,7 @@ const LoginButton = (): JSX.Element => {
 	);
 
 	const history = useHistory();
-	const { isAuthenticated, user } = React.useContext(AuthContext);
+	const { isAuthenticated, logoutUser } = React.useContext(AuthContext);
 
 	const handleMenuOpen = (event: any) => setMenuAnchorEl(event.currentTarget);
 	const handleMenuClose = () => setMenuAnchorEl(null);
@@ -25,6 +24,7 @@ const LoginButton = (): JSX.Element => {
 	const login = () => history.push('/login');
 	const logout = () => {
 		handleMenuClose();
+		logoutUser?.();
 	};
 
 	if (!isAuthenticated)
@@ -51,11 +51,13 @@ const LoginButton = (): JSX.Element => {
 				open={!!menuAnchorEl}
 				onClose={handleMenuClose}
 			>
+				<MenuItem>
+					<Button component={Link} to="/profile">
+						{'Profile'}
+					</Button>
+				</MenuItem>
 				<MenuItem onClick={logout}>
-					<ListItemText
-						primary="Logout"
-						secondary={user && `${user.username}`}
-					/>
+					<Button>{'Logout'}</Button>
 				</MenuItem>
 			</Menu>
 		</div>

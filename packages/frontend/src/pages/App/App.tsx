@@ -8,7 +8,9 @@ import jwtDecode from 'jwt-decode';
 import AppHeader from './AppHeader';
 import { AuthContext } from '../../contexts';
 import { IAuth, IUser } from '../../interfaces';
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
+import { Route, useHistory } from 'react-router-dom';
+import Home from '../Home';
 
 const LS_KEY = 'login-with-metamask:auth';
 
@@ -22,13 +24,15 @@ export const App = (): JSX.Element => {
 	const [auth, setAuth] = useState<IAuth | undefined>(undefined);
 	const [user, setUser] = useState<IUser | undefined>(undefined);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [client, setClient] = useState<AxiosInstance | undefined>(undefined);
+	const history = useHistory();
 
 	useEffect(() => {
 		// Access token is stored in localstorage
 		const ls = window.localStorage.getItem(LS_KEY);
 		if (ls) {
+			const auth = JSON.parse(ls);
 			setAuth(JSON.parse(ls));
+			handleLoggedIn(auth);
 		} else {
 			setIsAuthenticated(false);
 		}
@@ -48,34 +52,57 @@ export const App = (): JSX.Element => {
 			.then((response) => response.json())
 			.then((user) => {
 				setUser(user);
-				const client = axios.create({
-					baseURL: process.env.REACT_APP_BACKEND_URL,
-					headers: {
-						Authorization: `Bearer ${auth.accessToken}`,
-					},
-				});
-				setClient(client);
+				axios.defaults.headers.common[
+					'Authorization'
+				] = `Bearer ${auth.accessToken}`;
 			})
 			.catch(window.alert);
 
 		setAuth(auth);
 		setIsAuthenticated(true);
+		history.push('/profile');
 	};
 
 	const handleLoggedOut = () => {
 		localStorage.removeItem(LS_KEY);
 		setAuth(undefined);
+		setIsAuthenticated(false);
+		history.push('/login');
 	};
 
 	return (
 		<div className="App">
-			<AuthContext.Provider value={{ isAuthenticated, user, client }}>
+			<AuthContext.Provider
+				value={{
+					isAuthenticated,
+					user,
+					setUser,
+					logoutUser: handleLoggedOut,
+				}}
+			>
 				<AppHeader />
 				<div className="App-intro">
 					{auth ? (
-						<Profile auth={auth} onLoggedOut={handleLoggedOut} />
+						<main>
+							<Route path="/" exact={true} component={Home} />
+							<Route
+								path="/profile"
+								exact={true}
+								render={() => (
+									<Profile onLoggedOut={handleLoggedOut} />
+								)}
+							/>
+						</main>
 					) : (
-						<Login onLoggedIn={handleLoggedIn} />
+						<main>
+							<Route path="/" exact={true} component={Home} />
+							<Route
+								path="/*"
+								render={() => (
+									<Login onLoggedIn={handleLoggedIn} />
+								)}
+							/>
+						</main>
 					)}
 				</div>
 			</AuthContext.Provider>
