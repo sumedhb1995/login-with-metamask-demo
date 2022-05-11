@@ -1,9 +1,9 @@
 import React from 'react';
 import { AppBar, Button, Toolbar } from '@mui/material';
-import LoginButton from '../components/LoginButton';
+import LoginButton from '../../components/LoginButton';
 import { Link } from 'react-router-dom';
 
-import logo from '../assets/logo-transparent.png';
+import logo from '../../assets/logo-transparent.png';
 
 const AppHeader = (): JSX.Element => (
 	<AppBar position="static" style={{ backgroundColor: 'black' }}>

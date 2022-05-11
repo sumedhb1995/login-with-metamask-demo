@@ -3,9 +3,10 @@ import './Profile.css';
 import jwtDecode from 'jwt-decode';
 import React, { useState, useEffect } from 'react';
 import Blockies from 'react-blockies';
+import { IAuth } from '../../interfaces';
 
 interface Props {
-	accessToken: string;
+	auth: IAuth;
 	onLoggedOut: () => void;
 }
 
@@ -25,7 +26,10 @@ interface JwtDecoded {
 	};
 }
 
-export const Profile = ({ accessToken, onLoggedOut }: Props): JSX.Element => {
+export const Profile = ({
+	auth: { accessToken },
+	onLoggedOut,
+}: Props): JSX.Element => {
 	const [state, setState] = useState<State>({
 		loading: false,
 		user: undefined,
