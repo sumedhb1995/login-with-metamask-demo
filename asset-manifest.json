@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/login-with-metamask-demo/static/css/main.f5df24a4.chunk.css",
-    "main.js": "/login-with-metamask-demo/static/js/main.3c8e86f7.chunk.js",
-    "main.js.map": "/login-with-metamask-demo/static/js/main.3c8e86f7.chunk.js.map",
+    "main.js": "/login-with-metamask-demo/static/js/main.0ab9611b.chunk.js",
+    "main.js.map": "/login-with-metamask-demo/static/js/main.0ab9611b.chunk.js.map",
     "runtime-main.js": "/login-with-metamask-demo/static/js/runtime-main.3ad0df32.js",
     "runtime-main.js.map": "/login-with-metamask-demo/static/js/runtime-main.3ad0df32.js.map",
     "static/js/2.da0c49cc.chunk.js": "/login-with-metamask-demo/static/js/2.da0c49cc.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.3ad0df32.js",
     "static/js/2.da0c49cc.chunk.js",
     "static/css/main.f5df24a4.chunk.css",
-    "static/js/main.3c8e86f7.chunk.js"
+    "static/js/main.0ab9611b.chunk.js"
   ]
 }
