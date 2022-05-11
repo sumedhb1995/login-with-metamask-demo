@@ -8,6 +8,7 @@
 	"main": "build",
 	"private": true,
 	"repository": "https://github.com/amaurym/login-with-metamask-demo.git",
+	"proxy": "https://postmint-backend-dev.herokuapp.com/",
 	"scripts": {
 		"build": "react-scripts build",
 		"start": "react-scripts start"
