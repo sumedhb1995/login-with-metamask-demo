@@ -1,23 +1,21 @@
 {
   "files": {
-    "main.css": "/login-with-metamask-demo/static/css/main.a1d491fa.chunk.css",
-    "main.js": "/login-with-metamask-demo/static/js/main.675e6e60.chunk.js",
-    "main.js.map": "/login-with-metamask-demo/static/js/main.675e6e60.chunk.js.map",
-    "runtime-main.js": "/login-with-metamask-demo/static/js/runtime-main.86dd064b.js",
-    "runtime-main.js.map": "/login-with-metamask-demo/static/js/runtime-main.86dd064b.js.map",
-    "static/js/2.abac1ffe.chunk.js": "/login-with-metamask-demo/static/js/2.abac1ffe.chunk.js",
-    "static/js/2.abac1ffe.chunk.js.map": "/login-with-metamask-demo/static/js/2.abac1ffe.chunk.js.map",
+    "main.css": "/login-with-metamask-demo/static/css/main.f5df24a4.chunk.css",
+    "main.js": "/login-with-metamask-demo/static/js/main.3c8e86f7.chunk.js",
+    "main.js.map": "/login-with-metamask-demo/static/js/main.3c8e86f7.chunk.js.map",
+    "runtime-main.js": "/login-with-metamask-demo/static/js/runtime-main.3ad0df32.js",
+    "runtime-main.js.map": "/login-with-metamask-demo/static/js/runtime-main.3ad0df32.js.map",
+    "static/js/2.da0c49cc.chunk.js": "/login-with-metamask-demo/static/js/2.da0c49cc.chunk.js",
+    "static/js/2.da0c49cc.chunk.js.map": "/login-with-metamask-demo/static/js/2.da0c49cc.chunk.js.map",
     "index.html": "/login-with-metamask-demo/index.html",
-    "precache-manifest.c825c77f8df3886394daa627806ac874.js": "/login-with-metamask-demo/precache-manifest.c825c77f8df3886394daa627806ac874.js",
-    "service-worker.js": "/login-with-metamask-demo/service-worker.js",
-    "static/css/main.a1d491fa.chunk.css.map": "/login-with-metamask-demo/static/css/main.a1d491fa.chunk.css.map",
-    "static/js/2.abac1ffe.chunk.js.LICENSE.txt": "/login-with-metamask-demo/static/js/2.abac1ffe.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/login-with-metamask-demo/static/media/logo.5d5d9eef.svg"
+    "static/css/main.f5df24a4.chunk.css.map": "/login-with-metamask-demo/static/css/main.f5df24a4.chunk.css.map",
+    "static/js/2.da0c49cc.chunk.js.LICENSE.txt": "/login-with-metamask-demo/static/js/2.da0c49cc.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/login-with-metamask-demo/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.86dd064b.js",
-    "static/js/2.abac1ffe.chunk.js",
-    "static/css/main.a1d491fa.chunk.css",
-    "static/js/main.675e6e60.chunk.js"
+    "static/js/runtime-main.3ad0df32.js",
+    "static/js/2.da0c49cc.chunk.js",
+    "static/css/main.f5df24a4.chunk.css",
+    "static/js/main.3c8e86f7.chunk.js"
   ]
 }
